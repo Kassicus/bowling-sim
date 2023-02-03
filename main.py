@@ -14,10 +14,9 @@ class Player(object):
         self.career_spares = 0
         self.career_strikes = 0
 
-    def play_game(self, event, date):
-        game = Game(event, date, self)
+    def play_game(self, event="-", date="-"):
+        game = Game(self, event, date)
         game.bowl_game()
-        game.show_game()
         self.career_score += game.score
         self.career_spares += game.spares
         self.career_strikes += game.strikes
@@ -29,6 +28,7 @@ class Player(object):
             game.show_game()
 
     def show_career(self):
+        print(self.first_name, self.last_name)
         print("Total Games", self.career_games)
         print("Total Score", self.career_score)
         print("Total Strikes", self.career_strikes)
@@ -68,7 +68,7 @@ class Frame(object):
 
 
 class Game(object):
-    def __init__(self, event_name, event_date, player):
+    def __init__(self, player, event_name, event_date):
         self.event_name = event_name
         self.event_date = event_date
         self.player = player
@@ -132,19 +132,12 @@ class Game(object):
 
 
 kason = Player("Kason", "Suchow", 21, 12)
-kason.play_game("Test", "1/1/23")
-kason.play_game("Test Two", "1/1/23")
-kason.play_game("Test Three", "1/1/23")
-kason.play_game("Test Four", "1/1/23")
-kason.play_game("Test Five", "1/1/23")
-print('\n')
-kason.show_career()
-
 cooper = Player("Cooper", "Wilhoite", 21, 12)
-cooper.play_game("Test", "1/1/23")
-cooper.play_game("Test Two", "1/1/23")
-cooper.play_game("Test Three", "1/1/23")
-cooper.play_game("Test Four", "1/1/23")
-cooper.play_game("Test Five", "1/1/23")
+
+for x in range(100):
+    kason.play_game()
+    cooper.play_game()
+
+kason.show_career()
 print('\n')
 cooper.show_career()
